@@ -4,47 +4,102 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chef Frérot | Recettes Gourmandes</title>
-    <!-- Tailwind CSS CDN -->
+    <!-- CDNs -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Font Awesome pour les icônes -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- GSAP pour les animations -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <!-- Swiper JS pour les carrousels -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css">
     <style>
-        /* Custom CSS si besoin */
-        .food-card:hover {
-            transform: scale(1.03);
-            transition: all 0.3s ease;
+        /* Image de fond fixe avec overlay sombre */
+        body::before {
+            content: "";
+            background: url('https://images.unsplash.com/photo-1546069901-ba9599a7e63c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1480&q=80') center/cover no-repeat fixed;
+            opacity: 0.4;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+        
+        /* Animation de l'overlay menu */
+        .menu-overlay {
+            transform: translateX(-100%);
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .menu-overlay.active {
+            transform: translateX(0);
         }
     </style>
 </head>
-<body class="bg-amber-50 font-sans">
+<body class="bg-amber-50 font-sans min-h-screen">
     <!-- Navbar -->
-    <header class="bg-white shadow-md sticky top-0 z-50">
+    <header class="bg-white/80 backdrop-blur-md shadow-md sticky top-0 z-50">
         <nav class="container mx-auto p-4 flex justify-between items-center">
             <h1 class="text-2xl font-bold text-amber-800">🍳 Chef Frérot</h1>
-            <div class="flex space-x-4">
-                <a href="#" class="text-amber-600 hover:text-amber-800"><i class="fas fa-home mr-1"></i> Accueil</a>
-                <a href="#" class="text-amber-600 hover:text-amber-800"><i class="fas fa-utensils mr-1"></i> Recettes</a>
-                <a href="#" class="text-amber-600 hover:text-amber-800"><i class="fas fa-envelope mr-1"></i> Contact</a>
+            
+            <!-- Menu Desktop -->
+            <div class="hidden md:flex space-x-6">
+                <a href="#" class="text-amber-600 hover:text-amber-800 font-medium">Accueil</a>
+                <a href="#" class="text-amber-600 hover:text-amber-800 font-medium">Recettes</a>
+                <a href="#" class="text-amber-600 hover:text-amber-800 font-medium">Contact</a>
             </div>
+            
+            <!-- Burger Menu Mobile -->
+            <button id="menu-btn" class="md:hidden text-amber-800">
+                <i class="fas fa-bars text-2xl"></i>
+            </button>
         </nav>
     </header>
 
+    <!-- Overlay Menu Mobile -->
+    <div id="menu-overlay" class="menu-overlay fixed inset-0 bg-amber-800/95 z-40 w-3/4 max-w-sm">
+        <div class="p-8">
+            <button id="close-btn" class="text-white float-right">
+                <i class="fas fa-times text-2xl"></i>
+            </button>
+            <ul class="mt-16 space-y-6">
+                <li><a href="#" class="text-white text-xl block py-2 hover:bg-amber-700/50 px-4 rounded">Accueil</a></li>
+                <li><a href="#" class="text-white text-xl block py-2 hover:bg-amber-700/50 px-4 rounded">Recettes</a></li>
+                <li><a href="#" class="text-white text-xl block py-2 hover:bg-amber-700/50 px-4 rounded">Contact</a></li>
+            </ul>
+        </div>
+    </div>
+
     <!-- Hero Section -->
-    <section class="container mx-auto px-4 py-16 text-center">
-        <h2 class="text-4xl md:text-5xl font-bold text-amber-900 mb-4">Des recettes qui font vibrer les papilles</h2>
-        <p class="text-xl text-amber-700 max-w-2xl mx-auto">Découvrez des plats simples mais délicieux !</p>
-        <button id="cta-btn" class="mt-6 bg-amber-600 text-white px-6 py-3 rounded-full hover:bg-amber-700 transition">
+    <section class="container mx-auto px-4 py-32 text-center">
+        <h2 class="text-4xl md:text-6xl font-bold text-amber-900 mb-6">Des recettes qui font vibrer les papilles</h2>
+        <p class="text-xl md:text-2xl text-amber-800 max-w-2xl mx-auto">Découvrez des plats simples mais délicieux !</p>
+        <button id="cta-btn" class="mt-10 bg-amber-600 text-white px-8 py-3 rounded-full hover:bg-amber-700 transition text-lg font-medium">
             Explorer les recettes <i class="fas fa-arrow-right ml-2"></i>
         </button>
     </section>
 
-    <!-- Scripts JS -->
-    <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+    <!-- Scripts -->
     <script>
+        // Gestion du menu mobile
+        const menuBtn = document.getElementById('menu-btn');
+        const closeBtn = document.getElementById('close-btn');
+        const menuOverlay = document.getElementById('menu-overlay');
+
+        menuBtn.addEventListener('click', () => {
+            menuOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden'; // Bloque le scroll
+        });
+
+        closeBtn.addEventListener('click', () => {
+            menuOverlay.classList.remove('active');
+            document.body.style.overflow = 'auto'; // Rétablit le scroll
+        });
+
+        // Animation GSAP du titre
+        gsap.from("h2", { 
+            duration: 1.2, 
+            y: 50, 
+            opacity: 0, 
+            ease: "power3.out" 
+        });
+
         // Animation GSAP du bouton CTA
         gsap.from("#cta-btn", { 
             duration: 1.5, 
@@ -52,8 +107,6 @@
             opacity: 0, 
             ease: "bounce.out" 
         });
-
-        // À suivre : Fetch des recettes + Swiper initialisation
     </script>
 </body>
 </html>
