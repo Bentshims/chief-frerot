@@ -8,18 +8,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
     <style>
-        body::before {
-            content: "";
-            background: url('https://images.unsplash.com/photo-1546069901-ba9599a7e63c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1480&q=80') center/cover no-repeat fixed;
-            opacity: 0.4;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-        }
-        
         #menu-overlay {
             transform: translateX(-100%);
             transition: transform 0.3s ease-out;
@@ -41,25 +29,39 @@
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
         }
 
-        <!-- Ajoute ce CSS dans ta balise style -->
-  
-    @keyframes zoom {
-      0% { transform: scale(1); }
-      100% { transform: scale(1.1); }
-    }
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    @keyframes bounceIn {
-      0% { opacity: 0; transform: scale(0.8); }
-      50% { transform: scale(1.05); }
-      100% { opacity: 1; transform: scale(1); }
-    }
-    .animate-zoom { animation: zoom 15s infinite alternate; }
-    .animate-fadeIn { animation: fadeIn 1s ease-out forwards; }
-    .animate-bounceIn { animation: bounceIn 0.8s ease-out forwards; }
-    .delay-100 { animation-delay: 0.1s; }
+        @keyframes zoom {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.1); }
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes bounceIn {
+            0% { opacity: 0; transform: scale(0.8); }
+            50% { transform: scale(1.05); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+        .animate-zoom { animation: zoom 15s infinite alternate; }
+        .animate-fadeIn { animation: fadeIn 1s ease-out forwards; }
+        .animate-bounceIn { animation: bounceIn 0.8s ease-out forwards; }
+        .delay-100 { animation-delay: 0.1s; }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+        @keyframes spin-slow {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        .animate-fadeInUp { animation: fadeInUp 0.8s ease-out forwards; }
+        .animate-bounce { animation: bounce 2s infinite; }
+        .animate-spin-slow { animation: spin-slow 4s linear infinite; }
     </style>
 </head>
 <body class="bg-amber-50 font-sans min-h-screen overflow-x-hidden">
@@ -94,196 +96,316 @@
         </div>
     </div>
 
-  <!-- Hero Section améliorée -->
-<section class="relative overflow-hidden">
-    <!-- Fond animé -->
-    <div class="absolute inset-0 z-0">
-      <div class="absolute inset-0 bg-black/30"></div>
-      <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" 
-           alt="Nourriture"
-           class="w-full h-full object-cover animate-zoom"
-           style="animation: zoom 15s infinite alternate;">
-    </div>
-  
-    <div class="container mx-auto px-4 py-40 text-center relative z-10">
-      <!-- Titre avec animation -->
-      <h2 class="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6 animate-fadeIn">
-        <span class="bg-gradient-to-r from-amber-400 to-amber-600 bg-clip-text text-transparent">
-          Des recettes vibrantes
-        </span>
-      </h2>
-      
-      <!-- Sous-titre -->
-      <p class="text-xl md:text-2xl text-amber-100 max-w-2xl mx-auto mb-10 animate-fadeIn delay-100">
-        Découvrez des plats simples mais <span class="font-semibold text-amber-300">exceptionnels</span>
-      </p>
-      
-      <!-- Bouton CTA amélioré -->
-      <button class="mt-4 bg-gradient-to-r from-amber-500 to-amber-700 text-white px-10 py-4 rounded-full hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-amber-500/30 text-lg font-bold animate-bounceIn">
-        Explorer les recettes 
-        <i class="fas fa-arrow-right ml-3 group-hover:ml-4 transition-all"></i>
-      </button>
-    </div>
-  
-    <!-- Vague décorative -->
-    <div class="absolute bottom-0 w-full h-24 bg-amber-50 z-10 transform rotate-180">
-      <svg viewBox="0 0 1200 120" preserveAspectRatio="none" class="fill-current text-amber-50 w-full h-full">
-        <path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z" opacity=".25"></path>
-        <path d="M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z" opacity=".5"></path>
-        <path d="M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z"></path>
-      </svg>
-    </div>
-  </section>
+    <!-- Hero Section améliorée -->
+    <section class="relative overflow-hidden">
+        <!-- Fond animé -->
+        <div class="absolute inset-0 z-0">
+            <div class="absolute inset-0 bg-black/30"></div>
+            <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" 
+                alt="Nourriture"
+                class="w-full h-full object-cover animate-zoom"
+                style="animation: zoom 15s infinite alternate;">
+        </div>
+    
+        <div class="container mx-auto px-4 py-40 text-center relative z-10">
+            <!-- Titre avec animation -->
+            <h2 class="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6 animate-fadeIn">
+                <span class="bg-gradient-to-r from-amber-400 to-amber-600 bg-clip-text text-transparent">
+                    Des recettes vibrantes
+                </span>
+            </h2>
+            
+            <!-- Sous-titre -->
+            <p class="text-xl md:text-2xl text-amber-100 max-w-2xl mx-auto mb-10 animate-fadeIn delay-100">
+                Découvrez des plats simples mais <span class="font-semibold text-amber-300">exceptionnels</span>
+            </p>
+            
+            <!-- Bouton CTA amélioré -->
+            <button class="mt-4 bg-gradient-to-r from-amber-500 to-amber-700 text-white px-10 py-4 rounded-full hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-amber-500/30 text-lg font-bold animate-bounceIn">
+                Explorer les recettes 
+                <i class="fas fa-arrow-right ml-3 group-hover:ml-4 transition-all"></i>
+            </button>
+        </div>
+    
+        <!-- Vague décorative -->
+        <div class="absolute bottom-0 w-full h-24 bg-amber-50 z-10 transform rotate-180">
+            <svg viewBox="0 0 1200 120" preserveAspectRatio="none" class="fill-current text-amber-50 w-full h-full">
+                <path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z" opacity=".25"></path>
+                <path d="M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z" opacity=".5"></path>
+                <path d="M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z"></path>
+            </svg>
+        </div>
+    </section>
 
-
-    <!-- Section Recettes -->
-    <section class="container mx-auto px-4 py-12">
-        <h2 class="text-3xl font-bold text-center text-amber-900 mb-12">Nos recettes phares</h2>
-        
-        <!-- Swiper Container -->
-        <div class="swiper recipeSwiper">
-            <div class="swiper-wrapper pb-12">
-                <!-- Recette 1 -->
-                <div class="swiper-slide">
-                    <div class="recipe-card bg-white rounded-xl shadow-md overflow-hidden h-full">
-                        <div class="relative h-48 overflow-hidden">
-                            <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" 
-                                 alt="Salade healthy" 
-                                 class="w-full h-full object-cover">
-                            <span class="absolute top-4 right-4 bg-green-500 text-white px-2 py-1 rounded-full text-xs font-bold">HEALTHY</span>
-                        </div>
-                        <div class="p-6">
-                            <h3 class="text-xl font-bold text-gray-800 mb-2">Salade César Light</h3>
-                            <div class="flex items-center text-sm text-gray-600 mb-4">
-                                <span class="mr-3"><i class="fas fa-clock mr-1 text-amber-500"></i> 15 min</span>
-                                <span><i class="fas fa-utensils mr-1 text-amber-500"></i> Facile</span>
+        <!-- Section Recettes -->
+        <section class="container mx-auto px-4 py-12">
+            <h2 class="text-3xl font-bold text-center text-amber-900 mb-12">Nos recettes phares</h2>
+            
+            <!-- Swiper Container -->
+            <div class="swiper recipeSwiper">
+                <div class="swiper-wrapper pb-12">
+                    <!-- Recette 1 -->
+                    <div class="swiper-slide">
+                        <div class="recipe-card bg-white rounded-xl shadow-md overflow-hidden h-full">
+                            <div class="relative h-48 overflow-hidden">
+                                <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" 
+                                     alt="Salade healthy" 
+                                     class="w-full h-full object-cover">
+                                <span class="absolute top-4 right-4 bg-green-500 text-white px-2 py-1 rounded-full text-xs font-bold">HEALTHY</span>
                             </div>
-                            <button class="w-full bg-amber-100 text-amber-800 py-2 rounded-lg font-medium hover:bg-amber-200 transition">
-                                Voir la recette <i class="fas fa-arrow-right ml-1"></i>
-                            </button>
+                            <div class="p-6">
+                                <h3 class="text-xl font-bold text-gray-800 mb-2">Salade César Light</h3>
+                                <div class="flex items-center text-sm text-gray-600 mb-4">
+                                    <span class="mr-3"><i class="fas fa-clock mr-1 text-amber-500"></i> 15 min</span>
+                                    <span><i class="fas fa-utensils mr-1 text-amber-500"></i> Facile</span>
+                                </div>
+                                <button class="w-full bg-amber-100 text-amber-800 py-2 rounded-lg font-medium hover:bg-amber-200 transition">
+                                    Voir la recette <i class="fas fa-arrow-right ml-1"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Recette 2 -->
+                    <div class="swiper-slide">
+                        <div class="recipe-card bg-white rounded-xl shadow-md overflow-hidden h-full">
+                            <div class="relative h-48 overflow-hidden">
+                                <img src="https://images.unsplash.com/photo-1544025162-d76694265947?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1469&q=80" 
+                                     alt="Poulet rôti" 
+                                     class="w-full h-full object-cover">
+                                <span class="absolute top-4 right-4 bg-red-500 text-white px-2 py-1 rounded-full text-xs font-bold">POPULAIRE</span>
+                            </div>
+                            <div class="p-6">
+                                <h3 class="text-xl font-bold text-gray-800 mb-2">Poulet Rôti aux Herbes</h3>
+                                <div class="flex items-center text-sm text-gray-600 mb-4">
+                                    <span class="mr-3"><i class="fas fa-clock mr-1 text-amber-500"></i> 1h 10min</span>
+                                    <span><i class="fas fa-utensils mr-1 text-amber-500"></i> Moyen</span>
+                                </div>
+                                <button class="w-full bg-amber-100 text-amber-800 py-2 rounded-lg font-medium hover:bg-amber-200 transition">
+                                    Voir la recette <i class="fas fa-arrow-right ml-1"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Recette 3 -->
+                    <div class="swiper-slide">
+                        <div class="recipe-card bg-white rounded-xl shadow-md overflow-hidden h-full">
+                            <div class="relative h-48 overflow-hidden">
+                                <img src="https://images.unsplash.com/photo-1565557623262-b51c2513a641?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1371&q=80" 
+                                     alt="Pâtes carbonara" 
+                                     class="w-full h-full object-cover">
+                                <span class="absolute top-4 right-4 bg-blue-500 text-white px-2 py-1 rounded-full text-xs font-bold">CLASSIQUE</span>
+                            </div>
+                            <div class="p-6">
+                                <h3 class="text-xl font-bold text-gray-800 mb-2">Spaghetti Carbonara</h3>
+                                <div class="flex items-center text-sm text-gray-600 mb-4">
+                                    <span class="mr-3"><i class="fas fa-clock mr-1 text-amber-500"></i> 25 min</span>
+                                    <span><i class="fas fa-utensils mr-1 text-amber-500"></i> Facile</span>
+                                </div>
+                                <button class="w-full bg-amber-100 text-amber-800 py-2 rounded-lg font-medium hover:bg-amber-200 transition">
+                                    Voir la recette <i class="fas fa-arrow-right ml-1"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Recette 4 -->
+                    <div class="swiper-slide">
+                        <div class="recipe-card bg-white rounded-xl shadow-md overflow-hidden h-full">
+                            <div class="relative h-48 overflow-hidden">
+                                <img src="https://images.unsplash.com/photo-1484723091739-30a097e8f929?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1498&q=80" 
+                                     alt="Pancakes" 
+                                     class="w-full h-full object-cover">
+                                <span class="absolute top-4 right-4 bg-purple-500 text-white px-2 py-1 rounded-full text-xs font-bold">DESSERT</span>
+                            </div>
+                            <div class="p-6">
+                                <h3 class="text-xl font-bold text-gray-800 mb-2">Pancakes Moelleux</h3>
+                                <div class="flex items-center text-sm text-gray-600 mb-4">
+                                    <span class="mr-3"><i class="fas fa-clock mr-1 text-amber-500"></i> 20 min</span>
+                                    <span><i class="fas fa-utensils mr-1 text-amber-500"></i> Facile</span>
+                                </div>
+                                <button class="w-full bg-amber-100 text-amber-800 py-2 rounded-lg font-medium hover:bg-amber-200 transition">
+                                    Voir la recette <i class="fas fa-arrow-right ml-1"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Recette 5 -->
+                    <div class="swiper-slide">
+                        <div class="recipe-card bg-white rounded-xl shadow-md overflow-hidden h-full">
+                            <div class="relative h-48 overflow-hidden">
+                                <img src="https://images.unsplash.com/photo-1473093295043-cdd812d0e601?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" 
+                                     alt="Pizza" 
+                                     class="w-full h-full object-cover">
+                                <span class="absolute top-4 right-4 bg-yellow-500 text-white px-2 py-1 rounded-full text-xs font-bold">FAMILIAL</span>
+                            </div>
+                            <div class="p-6">
+                                <h3 class="text-xl font-bold text-gray-800 mb-2">Pizza Margherita</h3>
+                                <div class="flex items-center text-sm text-gray-600 mb-4">
+                                    <span class="mr-3"><i class="fas fa-clock mr-1 text-amber-500"></i> 40 min</span>
+                                    <span><i class="fas fa-utensils mr-1 text-amber-500"></i> Moyen</span>
+                                </div>
+                                <button class="w-full bg-amber-100 text-amber-800 py-2 rounded-lg font-medium hover:bg-amber-200 transition">
+                                    Voir la recette <i class="fas fa-arrow-right ml-1"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Recette 6 -->
+                    <div class="swiper-slide">
+                        <div class="recipe-card bg-white rounded-xl shadow-md overflow-hidden h-full">
+                            <div class="relative h-48 overflow-hidden">
+                                <img src="https://images.unsplash.com/photo-1559847844-5315695dadae?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1398&q=80" 
+                                     alt="Burger" 
+                                     class="w-full h-full object-cover">
+                                <span class="absolute top-4 right-4 bg-orange-500 text-white px-2 py-1 rounded-full text-xs font-bold">GOURMAND</span>
+                            </div>
+                            <div class="p-6">
+                                <h3 class="text-xl font-bold text-gray-800 mb-2">Burger Maison</h3>
+                                <div class="flex items-center text-sm text-gray-600 mb-4">
+                                    <span class="mr-3"><i class="fas fa-clock mr-1 text-amber-500"></i> 30 min</span>
+                                    <span><i class="fas fa-utensils mr-1 text-amber-500"></i> Facile</span>
+                                </div>
+                                <button class="w-full bg-amber-100 text-amber-800 py-2 rounded-lg font-medium hover:bg-amber-200 transition">
+                                    Voir la recette <i class="fas fa-arrow-right ml-1"></i>
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
-                
-                <!-- Recette 2 -->
-                <div class="swiper-slide">
-                    <div class="recipe-card bg-white rounded-xl shadow-md overflow-hidden h-full">
-                        <div class="relative h-48 overflow-hidden">
-                            <img src="https://images.unsplash.com/photo-1544025162-d76694265947?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1469&q=80" 
-                                 alt="Poulet rôti" 
-                                 class="w-full h-full object-cover">
-                            <span class="absolute top-4 right-4 bg-red-500 text-white px-2 py-1 rounded-full text-xs font-bold">POPULAIRE</span>
-                        </div>
-                        <div class="p-6">
-                            <h3 class="text-xl font-bold text-gray-800 mb-2">Poulet Rôti aux Herbes</h3>
-                            <div class="flex items-center text-sm text-gray-600 mb-4">
-                                <span class="mr-3"><i class="fas fa-clock mr-1 text-amber-500"></i> 1h 10min</span>
-                                <span><i class="fas fa-utensils mr-1 text-amber-500"></i> Moyen</span>
+                <!-- Pagination et navigation -->
+                <div class="swiper-pagination mt-6"></div>
+            </div>
+        </section>
+    <!-- Section Recette de la Semaine -->
+    <section class="bg-amber-50 py-20 relative">
+        <!-- Effet de vague en haut -->
+        <div class="absolute top-0 w-full h-24 -mt-24 transform">
+            <svg viewBox="0 0 1200 120" preserveAspectRatio="none" class="fill-current text-amber-50 w-full h-full">
+                <path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z" opacity=".25"></path>
+                <path d="M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z" opacity=".5"></path>
+                <path d="M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z"></path>
+            </svg>
+        </div>
+    
+        <div class="container mx-auto px-4">
+            <!-- Titre -->
+            <div class="text-center mb-16">
+                <span class="inline-block bg-amber-600 text-white px-4 py-1 rounded-full text-sm font-bold mb-3 animate-bounce">
+                    ✨ Recette du chef
+                </span>
+                <h2 class="text-3xl md:text-4xl font-bold text-amber-900">
+                    Notre <span class="text-amber-600">recette phare</span> cette semaine
+                </h2>
+            </div>
+    
+            <!-- Carte Recette -->
+            <div class="bg-white rounded-2xl shadow-xl overflow-hidden max-w-4xl mx-auto animate-fadeInUp">
+                <div class="md:flex">
+                    <!-- Colonne Image -->
+                    <div class="md:w-1/2 relative overflow-hidden group">
+                        <img src="https://images.unsplash.com/photo-1544025162-d76694265947?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" 
+                            alt="Poulet rôti aux herbes" 
+                            class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-6">
+                            <div class="flex items-center text-white">
+                                <div class="mr-4">
+                                    <i class="fas fa-star text-amber-400"></i>
+                                    <span class="ml-1 font-bold">4.9</span>
+                                    <span class="text-amber-200 text-sm">/5</span>
+                                </div>
+                                <div>
+                                    <i class="fas fa-clock text-amber-400"></i>
+                                    <span class="ml-1 font-bold">1h 15min</span>
+                                </div>
                             </div>
-                            <button class="w-full bg-amber-100 text-amber-800 py-2 rounded-lg font-medium hover:bg-amber-200 transition">
-                                Voir la recette <i class="fas fa-arrow-right ml-1"></i>
-                            </button>
                         </div>
                     </div>
-                </div>
-                
-                <!-- Recette 3 -->
-                <div class="swiper-slide">
-                    <div class="recipe-card bg-white rounded-xl shadow-md overflow-hidden h-full">
-                        <div class="relative h-48 overflow-hidden">
-                            <img src="https://images.unsplash.com/photo-1565557623262-b51c2513a641?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1371&q=80" 
-                                 alt="Pâtes carbonara" 
-                                 class="w-full h-full object-cover">
-                            <span class="absolute top-4 right-4 bg-blue-500 text-white px-2 py-1 rounded-full text-xs font-bold">CLASSIQUE</span>
+    
+                    <!-- Colonne Contenu -->
+                    <div class="md:w-1/2 p-8">
+                        <h3 class="text-2xl font-bold text-gray-800 mb-2">Poulet rôti aux herbes de Provence</h3>
+                        <p class="text-gray-600 mb-6">Un classique revisité avec des herbes fraîches et une croûte parfaitement dorée.</p>
+                        
+                        <div class="mb-6">
+                            <h4 class="font-bold text-amber-700 mb-2 flex items-center">
+                                <i class="fas fa-seedling mr-2"></i> Ingrédients principaux
+                            </h4>
+                            <ul class="grid grid-cols-2 gap-2 text-sm text-gray-700">
+                                <li class="flex items-center"><i class="fas fa-check text-amber-500 mr-2 text-xs"></i> 1 poulet fermier</li>
+                                <li class="flex items-center"><i class="fas fa-check text-amber-500 mr-2 text-xs"></i> Herbes de Provence</li>
+                                <li class="flex items-center"><i class="fas fa-check text-amber-500 mr-2 text-xs"></i> Beurre demi-sel</li>
+                                <li class="flex items-center"><i class="fas fa-check text-amber-500 mr-2 text-xs"></i> Ail frais</li>
+                                <li class="flex items-center"><i class="fas fa-check text-amber-500 mr-2 text-xs"></i> Citron bio</li>
+                                <li class="flex items-center"><i class="fas fa-check text-amber-500 mr-2 text-xs"></i> Sel & poivre</li>
+                            </ul>
                         </div>
-                        <div class="p-6">
-                            <h3 class="text-xl font-bold text-gray-800 mb-2">Spaghetti Carbonara</h3>
-                            <div class="flex items-center text-sm text-gray-600 mb-4">
-                                <span class="mr-3"><i class="fas fa-clock mr-1 text-amber-500"></i> 25 min</span>
-                                <span><i class="fas fa-utensils mr-1 text-amber-500"></i> Facile</span>
-                            </div>
-                            <button class="w-full bg-amber-100 text-amber-800 py-2 rounded-lg font-medium hover:bg-amber-200 transition">
-                                Voir la recette <i class="fas fa-arrow-right ml-1"></i>
+    
+                        <div class="flex flex-wrap gap-4 mt-8">
+                            <button onclick="showRecipe('rec1')" class="flex-1 bg-amber-600 hover:bg-amber-700 text-white py-3 px-4 rounded-lg font-medium transition flex items-center justify-center">
+                                <i class="fas fa-book-open mr-2"></i> Voir la recette
                             </button>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Recette 4 -->
-                <div class="swiper-slide">
-                    <div class="recipe-card bg-white rounded-xl shadow-md overflow-hidden h-full">
-                        <div class="relative h-48 overflow-hidden">
-                            <img src="https://images.unsplash.com/photo-1484723091739-30a097e8f929?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1498&q=80" 
-                                 alt="Pancakes" 
-                                 class="w-full h-full object-cover">
-                            <span class="absolute top-4 right-4 bg-purple-500 text-white px-2 py-1 rounded-full text-xs font-bold">DESSERT</span>
-                        </div>
-                        <div class="p-6">
-                            <h3 class="text-xl font-bold text-gray-800 mb-2">Pancakes Moelleux</h3>
-                            <div class="flex items-center text-sm text-gray-600 mb-4">
-                                <span class="mr-3"><i class="fas fa-clock mr-1 text-amber-500"></i> 20 min</span>
-                                <span><i class="fas fa-utensils mr-1 text-amber-500"></i> Facile</span>
-                            </div>
-                            <button class="w-full bg-amber-100 text-amber-800 py-2 rounded-lg font-medium hover:bg-amber-200 transition">
-                                Voir la recette <i class="fas fa-arrow-right ml-1"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Recette 5 -->
-                <div class="swiper-slide">
-                    <div class="recipe-card bg-white rounded-xl shadow-md overflow-hidden h-full">
-                        <div class="relative h-48 overflow-hidden">
-                            <img src="https://images.unsplash.com/photo-1473093295043-cdd812d0e601?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" 
-                                 alt="Pizza" 
-                                 class="w-full h-full object-cover">
-                            <span class="absolute top-4 right-4 bg-yellow-500 text-white px-2 py-1 rounded-full text-xs font-bold">FAMILIAL</span>
-                        </div>
-                        <div class="p-6">
-                            <h3 class="text-xl font-bold text-gray-800 mb-2">Pizza Margherita</h3>
-                            <div class="flex items-center text-sm text-gray-600 mb-4">
-                                <span class="mr-3"><i class="fas fa-clock mr-1 text-amber-500"></i> 40 min</span>
-                                <span><i class="fas fa-utensils mr-1 text-amber-500"></i> Moyen</span>
-                            </div>
-                            <button class="w-full bg-amber-100 text-amber-800 py-2 rounded-lg font-medium hover:bg-amber-200 transition">
-                                Voir la recette <i class="fas fa-arrow-right ml-1"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Recette 6 -->
-                <div class="swiper-slide">
-                    <div class="recipe-card bg-white rounded-xl shadow-md overflow-hidden h-full">
-                        <div class="relative h-48 overflow-hidden">
-                            <img src="https://images.unsplash.com/photo-1559847844-5315695dadae?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1398&q=80" 
-                                 alt="Burger" 
-                                 class="w-full h-full object-cover">
-                            <span class="absolute top-4 right-4 bg-orange-500 text-white px-2 py-1 rounded-full text-xs font-bold">GOURMAND</span>
-                        </div>
-                        <div class="p-6">
-                            <h3 class="text-xl font-bold text-gray-800 mb-2">Burger Maison</h3>
-                            <div class="flex items-center text-sm text-gray-600 mb-4">
-                                <span class="mr-3"><i class="fas fa-clock mr-1 text-amber-500"></i> 30 min</span>
-                                <span><i class="fas fa-utensils mr-1 text-amber-500"></i> Facile</span>
-                            </div>
-                            <button class="w-full bg-amber-100 text-amber-800 py-2 rounded-lg font-medium hover:bg-amber-200 transition">
-                                Voir la recette <i class="fas fa-arrow-right ml-1"></i>
+                            <button onclick="toggleSave('rec1')" class="flex-1 bg-white border border-amber-600 text-amber-600 hover:bg-amber-50 py-3 px-4 rounded-lg font-medium transition flex items-center justify-center">
+                                <i class="far fa-heart mr-2"></i> Sauvegarder
                             </button>
                         </div>
                     </div>
                 </div>
             </div>
-            <!-- Pagination et navigation -->
-            <div class="swiper-pagination mt-6"></div>
-            <!-- <div class="swiper-button-next text-amber-600"></div>
-            <div class="swiper-button-prev text-amber-600"></div> -->
+    
+            <!-- Badge "Nouvelle recette chaque lundi" -->
+            <div class="text-center mt-12">
+                <p class="inline-flex items-center text-amber-800 bg-amber-100 px-4 py-2 rounded-full text-sm">
+                    <i class="fas fa-sync-alt mr-2 animate-spin-slow"></i> Nouvelle recette chaque lundi !
+                </p>
+            </div>
         </div>
     </section>
 
+    <!-- Modal pour les recettes -->
+    <div id="recipe-modal" class="fixed inset-0 bg-black/50 z-50 hidden items-center justify-center p-4">
+        <div class="bg-white rounded-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+            <div class="p-6">
+                <button onclick="closeModal()" class="float-right text-gray-500 hover:text-gray-700">
+                    <i class="fas fa-times"></i>
+                </button>
+                <h3 id="modal-title" class="text-2xl font-bold text-amber-900 mb-4"></h3>
+                <div id="modal-content"></div>
+            </div>
+        </div>
+    </div>
+
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script id="recipes-data" type="application/json">
+        {
+            "featured": {
+                "id": "rec1",
+                "title": "Poulet rôti aux herbes de Provence",
+                "description": "Un classique revisité avec des herbes fraîches et une croûte parfaitement dorée.",
+                "image": "https://images.unsplash.com/photo-1544025162-d76694265947?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
+                "rating": 4.9,
+                "time": "1h 15min",
+                "ingredients": [
+                    "1 poulet fermier",
+                    "Herbes de Provence",
+                    "Beurre demi-sel",
+                    "Ail frais",
+                    "Citron bio",
+                    "Sel & poivre"
+                ],
+                "steps": [
+                    "Préchauffer le four à 180°C",
+                    "Frotter le poulet avec les herbes et le beurre",
+                    "Enfourner pendant 1h",
+                    "Laisser reposer 10min avant de servir"
+                ]
+            }
+        }
+    </script>
     <script>
         // Menu mobile
         const menuBtn = document.getElementById('menu-btn');
@@ -306,15 +428,19 @@
                 document.body.style.overflow = 'auto';
             }
         });
-
+        
         // Initialisation du Swiper
         const swiper = new Swiper('.recipeSwiper', {
             loop: true,
             slidesPerView: 1,
             spaceBetween: 20,
             autoplay: {          
-                delay: 3000, // 3 secondes
-                disableOnInteraction: false, // Continue après interaction utilisateur
+                delay: 3000,
+                disableOnInteraction: false,
+            },
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
             },
             breakpoints: {
                 640: {
@@ -323,6 +449,69 @@
                 1024: {
                     slidesPerView: 3,
                 }
+            }
+        });
+
+        // Gestion des recettes
+        function showRecipe(recipeId) {
+            const data = JSON.parse(document.getElementById('recipes-data').textContent);
+            const recipe = data.featured;
+            
+            document.getElementById('modal-title').textContent = recipe.title;
+            
+            let html = `
+                <img src="${recipe.image}" alt="${recipe.title}" class="w-full h-64 object-cover rounded-lg mb-6">
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div>
+                        <h4 class="font-bold text-amber-700 mb-3"><i class="fas fa-seedling mr-2"></i>Ingrédients</h4>
+                        <ul class="space-y-2">
+                            ${recipe.ingredients.map(i => `<li class="flex items-start"><i class="fas fa-check text-amber-500 mr-2 mt-1"></i>${i}</li>`).join('')}
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-amber-700 mb-3"><i class="fas fa-list-ol mr-2"></i>Préparation</h4>
+                        <ol class="list-decimal list-inside space-y-2 pl-4">
+                            ${recipe.steps.map(s => `<li>${s}</li>`).join('')}
+                        </ol>
+                    </div>
+                </div>
+            `;
+            
+            document.getElementById('modal-content').innerHTML = html;
+            document.getElementById('recipe-modal').classList.remove('hidden');
+        }
+
+        function closeModal() {
+            document.getElementById('recipe-modal').classList.add('hidden');
+        }
+
+        // Gestion des favoris
+        function toggleSave(recipeId) {
+            const saved = JSON.parse(localStorage.getItem('savedRecipes') || '[]');
+            const btn = event.currentTarget;
+            
+            if (saved.includes(recipeId)) {
+                localStorage.setItem('savedRecipes', JSON.stringify(saved.filter(id => id !== recipeId)));
+                btn.innerHTML = '<i class="far fa-heart mr-2"></i> Sauvegarder';
+                btn.classList.remove('text-red-600', 'border-red-600');
+                btn.classList.add('text-amber-600', 'border-amber-600');
+            } else {
+                localStorage.setItem('savedRecipes', JSON.stringify([...saved, recipeId]));
+                btn.innerHTML = '<i class="fas fa-heart mr-2"></i> Sauvegardé';
+                btn.classList.remove('text-amber-600', 'border-amber-600');
+                btn.classList.add('text-red-600', 'border-red-600');
+            }
+        }
+
+        // Au chargement
+        document.addEventListener('DOMContentLoaded', () => {
+            const saved = JSON.parse(localStorage.getItem('savedRecipes') || '[]');
+            const saveBtn = document.querySelector('[onclick="toggleSave(\'rec1\')"]');
+            
+            if (saved.includes('rec1') && saveBtn) {
+                saveBtn.innerHTML = '<i class="fas fa-heart mr-2"></i> Sauvegardé';
+                saveBtn.classList.remove('text-amber-600', 'border-amber-600');
+                saveBtn.classList.add('text-red-600', 'border-red-600');
             }
         });
     </script>
