@@ -77,36 +77,50 @@
 
     <!-- Scripts -->
     <script>
-        // Gestion du menu mobile
+        // Sélection des éléments
         const menuBtn = document.getElementById('menu-btn');
         const closeBtn = document.getElementById('close-btn');
         const menuOverlay = document.getElementById('menu-overlay');
-
+    
+        // Animation GSAP pour le menu
+        const menuTimeline = gsap.timeline({ paused: true })
+            .to(menuOverlay, { 
+                xPercent: 0, 
+                duration: 0.4, 
+                ease: "power3.out" 
+            })
+            .from(".menu-overlay li", {
+                x: -20,
+                opacity: 0,
+                stagger: 0.1,
+                duration: 0.3
+            }, "-=0.2");
+    
+        // Ouverture du menu
         menuBtn.addEventListener('click', () => {
-            menuOverlay.classList.add('active');
-            document.body.style.overflow = 'hidden'; // Bloque le scroll
+            menuOverlay.style.display = "block"; // Force l'affichage avant l'animation
+            menuTimeline.play();
+            document.body.style.overflow = 'hidden';
         });
-
+    
+        // Fermeture du menu
         closeBtn.addEventListener('click', () => {
-            menuOverlay.classList.remove('active');
-            document.body.style.overflow = 'auto'; // Rétablit le scroll
+            menuTimeline.reverse().then(() => {
+                menuOverlay.style.display = "none"; // Masque après l'animation
+                document.body.style.overflow = 'auto';
+            });
         });
-
-        // Animation GSAP du titre
-        gsap.from("h2", { 
-            duration: 1.2, 
-            y: 50, 
-            opacity: 0, 
-            ease: "power3.out" 
-        });
-
-        // Animation GSAP du bouton CTA
-        gsap.from("#cta-btn", { 
-            duration: 1.5, 
-            y: 50, 
-            opacity: 0, 
-            ease: "bounce.out" 
+    
+        // Fermeture en cliquant à côté du menu
+        menuOverlay.addEventListener('click', (e) => {
+            if (e.target === menuOverlay) {
+                menuTimeline.reverse().then(() => {
+                    menuOverlay.style.display = "none";
+                    document.body.style.overflow = 'auto';
+                });
+            }
         });
     </script>
+      
 </body>
 </html>
